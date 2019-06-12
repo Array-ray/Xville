@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_nav_home"
+        android:icon="@drawable/ic_bottom_nav_home_normal_24dp"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/bottom_nav_club"
+        android:icon="@drawable/ic_bottom_nav_club_normal_24dp"
+        android:title="Club"/>
+
+    <item
+        android:id="@+id/bottom_nav_me"
+        android:icon="@drawable/ic_bottom_nav_me_normal"
+        android:title="Me"/>
+
+</menu>

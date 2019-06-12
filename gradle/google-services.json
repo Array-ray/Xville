@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "739282333086",
+    "firebase_url": "https://xville-b7298.firebaseio.com",
+    "project_id": "xville-b7298",
+    "storage_bucket": "xville-b7298.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739282333086:android:0470d54cff30a11d",
+        "android_client_info": {
+          "package_name": "com.example.xville_v1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "739282333086-ensqpu5fgmn1h4q0capkvvdso4ppam6t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTNPBFczMTESL_t-69fgmvIWsT0jk14vA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "739282333086-ensqpu5fgmn1h4q0capkvvdso4ppam6t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/search_field"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/search_outline"
+            android:ems="10"
+            android:inputType="text"
+            android:paddingLeft="40dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            android:hint="Search here"
+            android:textColor="#999999"
+            android:textSize="16sp" />
+
+
+    </FrameLayout>
+    <android.support.v7.widget.SearchView
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        app:queryHint="Search Here"></android.support.v7.widget.SearchView>
+
+
+
+</RelativeLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_club_profile_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/logo"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp">
+
+            <TextView
+                android:id="@+id/tv_club_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rotaract"
+                android:textSize="25sp"
+                android:textColor="#000"/>
+
+
+            <TextView
+                android:id="@+id/tv_club_brief"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="The club brief goes here. Like: We
+                dance to Express, Not to impress"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
