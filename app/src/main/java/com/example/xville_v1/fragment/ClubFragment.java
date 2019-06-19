@@ -74,7 +74,7 @@ public class ClubFragment extends Fragment{
                     @Override
                     public ClubsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
                         View view = LayoutInflater.from(viewGroup.getContext())
-                                .inflate(R.layout.layout_listclub, viewGroup, false);
+                                .inflate(R.layout.item_listclub, viewGroup, false);
 
                         return new ClubsViewHolder(view);
                     }
@@ -94,7 +94,7 @@ public class ClubFragment extends Fragment{
         private TextView clubName, clubBrief;
         private CircleImageView clubImage;
         View mView;
-
+//
 
         //Binding the view with ID in xml layout resource
         public ClubsViewHolder(@NonNull View itemView) {
