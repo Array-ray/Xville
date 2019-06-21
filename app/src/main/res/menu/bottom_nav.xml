@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/bottom_nav_home"
-        android:icon="@drawable/ic_bottom_nav_home_normal_24dp"
+        android:icon="@drawable/ic_bottom_nav_home"
         android:title="Home"/>
 
     <item
         android:id="@+id/bottom_nav_club"
-        android:icon="@drawable/ic_bottom_nav_club_normal_24dp"
+        android:icon="@drawable/ic_bottom_nav_club"
         android:title="Club"/>
 
     <item
         android:id="@+id/bottom_nav_me"
-        android:icon="@drawable/ic_bottom_nav_me_normal"
+        android:icon="@drawable/ic_bottom_nav_me"
         android:title="Me"/>
 
 </menu>

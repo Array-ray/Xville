@@ -5,7 +5,7 @@
           android:state_pressed="true">
     </item>
 
-    <item android:drawable="@drawable/ic_bottom_nav_home_normal_24dp">
+    <item android:drawable="@drawable/ic_bottom_nav_home">
     </item>
 
 </selector>
