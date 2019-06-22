@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import com.example.xville_v1.Adapter.HomeHeaderEventAdapter;
 import com.example.xville_v1.Event;
 import com.example.xville_v1.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,7 @@ public class HomeFragment extends Fragment {
 
     protected ViewPager mVPagerHeader;
     List<Event> events;
+    private DatabaseReference mEventRef;
 
     @Nullable
     @Override
@@ -45,6 +49,15 @@ public class HomeFragment extends Fragment {
         mVPagerHeader = getView().findViewById(R.id.now_is_showing);
         HomeHeaderEventAdapter adapter = new HomeHeaderEventAdapter(getActivity(), events);
         mVPagerHeader.setAdapter(adapter);
-        mVPagerHeader.setPadding(90, 10,90,0);
+        mVPagerHeader.setPadding(0, 10,15,0);
+
+        //
+        mEventRef = FirebaseDatabase.getInstance().getReference().child("Events");
+    }
+
+    private void firebaseSearch(String st){
+        String searhText = st;
+        Query firebaseSearchQuery = mEventRef.orderByChild("title").startAt(searhText).endAt(searhText + "\uf8ff");
+
     }
 }

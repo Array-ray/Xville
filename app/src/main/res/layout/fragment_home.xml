@@ -1,88 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/main_page_margin"
+    android:fillViewport="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="50dp"
-        android:paddingBottom="15dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_bold"
-            android:text="Today"
-            android:textColor="#000"
-            android:textSize="40sp" />
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/main_page_margin">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="now"
-            android:textSize="20sp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="tmr"
-            android:textSize="20sp"/>
-    </LinearLayout>
-
-    <HorizontalScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/main_page_margin"
+            android:orientation="horizontal"
+            android:paddingTop="20dp"
+            android:paddingBottom="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Today"
+                android:textColor="#000"
+                android:textSize="40sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="now"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="tmr"
+                android:textSize="20sp"/>
+
+            <android.support.v7.widget.SearchView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="130dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/ic_search"/>
+        </LinearLayout>
+
+        <HorizontalScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <ImageView
-                android:layout_width="150dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/pos_rotaract"/>
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/pos_rotaract"/>
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/pos_rotaract" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/pos_rotaract"/>
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="8dp"
+                android:text="Category"
+                android:textSize="15dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/pos_rotaract"/>
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginRight="24dp"
+                android:src="@drawable/ic_cate_festival"
+                android:background="@drawable/btn_category_circle"/>
+
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/pos_rotaract"/>
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginRight="24dp"
+                android:src="@drawable/ic_cate_performance"
+                android:background="@drawable/btn_category_circle"/>
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginRight="24dp"
+                android:src="@drawable/ic_cate_workshop"
+                android:background="@drawable/btn_category_circle"/>
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginRight="24dp"
+                android:src="@drawable/ic_cate_competition"
+                android:background="@drawable/btn_category_circle"/>
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginRight="0dp"
+                android:src="@drawable/ic_cate_exibition"
+                android:background="@drawable/btn_category_circle"/>
         </LinearLayout>
-    </HorizontalScrollView>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Category"
-        android:textSize="15dp"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
+            android:text="Rank"
+            android:textSize="15dp"/>
 
 
-    //framework for viewPager
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/now_is_showing"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="90dp"></android.support.v4.view.ViewPager>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle_event_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/main_page_margin">
+        </android.support.v7.widget.RecyclerView>
 
 
-</LinearLayout>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/now_is_showing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="50dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </LinearLayout>
+
+</ScrollView>
