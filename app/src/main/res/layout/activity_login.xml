@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
+    android:padding="40dp"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".authentication.LoginActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/roboto_black"
         android:text="Sign In"
-        android:textSize="40dp"/>
+        android:textSize="50sp" />
+
 
     <EditText
         android:id="@+id/lg_ID"
@@ -39,7 +40,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:orientation="horizontal"
         android:gravity="center">
         <TextView
@@ -51,25 +52,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" Sign up"
+            android:textColor="@color/colorAccent"
             android:onClick="goRegister"/>
     </LinearLayout>
 
     <Button
         android:id="@+id/btn_lg_asUser"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:background="@drawable/rounded_button"
-        android:text="Sign in as normal user" />
+        android:textAllCaps="false"
+        android:text="I am a User"
+        android:textSize="23sp"/>
 
     <Button
         android:id="@+id/btn_lg_lg_asClub"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:text="Sign in as club administrator"/>
+        android:text="I am a club administrator"
+        android:background="@drawable/btn_disable"
+        android:textSize="23sp"
+        android:textColor="#ffffff"
+        android:textAllCaps="false"/>
 
 
 

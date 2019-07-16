@@ -1,4 +1,4 @@
-package com.example.xville_v1;
+package com.example.xville_v1.Model;
 
 public class User {
     private String Username;
