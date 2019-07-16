@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.xville_v1.Event;
+import com.example.xville_v1.Model.Event;
 import com.example.xville_v1.R;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class DataUtil  {
         List<ImageView> data = new ArrayList<>();
 
         //create a view inflate by an layout item consist of imageView, two TextView
-        View view = layoutInflater.inflate(R.layout.event_poster,null);
+        View view = layoutInflater.inflate(R.layout.item_card_event,null);
         ImageView imageView;
         TextView title, desc;
 

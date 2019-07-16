@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.xville_v1.authentication.GuideRoleActivity;
+
 public class SplashActivity extends AppCompatActivity {
 
     private Button mBtnSkip;
@@ -33,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mHandler.removeCallbacks(mRunnableToLogin);
-                toMainActivity();
+                toLoginActivity();
             }
         });
     }
@@ -43,7 +45,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void toLoginActivity(){
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, GuideRoleActivity.class);
         startActivity(intent);
         finish();
     }

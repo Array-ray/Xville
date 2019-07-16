@@ -9,11 +9,24 @@
         <item name="android:statusBarColor">@color/colorPrimaryDark</item>
         <item name="buttonStyle">@style/CustomButton</item>
         <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textAllCaps">false</item>
     </style>
+
+    <style name="EventBarTopTheme">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="CustomButton" parent="TextAppearance.AppCompat.Button">
         <item name="android:background">@drawable/custom_button</item>
         <item name="android:textColor">#eeeeee</item>
+        <item name="android:textAlignment">center</item>
     </style>
 
     <style name="DefaultFont">

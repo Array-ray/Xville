@@ -19,6 +19,7 @@
                 android:id="@+id/poster"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
+                android:src="@drawable/pos_globathon_performance"
                 android:scaleType="centerCrop"/>
 
             <TextView

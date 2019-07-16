@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="40dp"
+    android:orientation="vertical"
+    tools:context=".authentication.LoginActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/roboto_black"
+        android:text="Sign In"
+        android:textSize="50sp" />
+
+
+    <EditText
+        android:id="@+id/et_clubName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:inputType="text"
+        android:hint="Club name"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="263dp" />
+
+    <EditText
+        android:id="@+id/et_clubPwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:inputType="text"
+        android:hint="Password"
+        tools:layout_editor_absoluteX="98dp"
+        tools:layout_editor_absoluteY="263dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New to this? Click here to"/>
+        <TextView
+            android:id="@+id/tv_SignUpClub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Sign up"
+            android:textColor="@color/colorAccent"
+            android:onClick="goRegister"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_lgAsUser"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:textAllCaps="false"
+        android:background="@drawable/btn_disable"
+        android:text="I am a User"
+        android:textColor="#ffffff"
+        android:textSize="23sp"/>
+
+    <Button
+        android:id="@+id/btn_lgAsClub"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:text="I am a club administrator"
+        android:textSize="23sp"
+        android:textAllCaps="false"/>
+
+
+
+</LinearLayout>

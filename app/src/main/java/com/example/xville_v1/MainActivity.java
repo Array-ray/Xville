@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //navigation
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
