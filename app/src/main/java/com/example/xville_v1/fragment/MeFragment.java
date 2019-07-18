@@ -14,18 +14,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.xville_v1.Adapter.ScheduleVertiHolder;
 import com.example.xville_v1.Model.Event;
 import com.example.xville_v1.R;
 import com.example.xville_v1.authentication.LoginActivity;
+import com.example.xville_v1.util.DeleteDialog;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -37,6 +40,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class MeFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -64,6 +68,9 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
     //Title list stored in Schdule in firebase
     private List<String> scheduleList;
+
+    //delete dailog
+    private DeleteDialog deleteDialog;
 
     @Nullable
     @Override
@@ -135,7 +142,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                         .build();
 
 
-        FirebaseRecyclerAdapter<Event, ScheduleVertiHolder> firebaseRecyclerAdapter =
+        final FirebaseRecyclerAdapter<Event, ScheduleVertiHolder> firebaseRecyclerAdapter =
                 new FirebaseRecyclerAdapter<Event, ScheduleVertiHolder>(options) {
 
                     @Override
@@ -157,6 +164,59 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         //Set adapter
         firebaseRecyclerAdapter.startListening();
         mRecycleSchedule.setAdapter(firebaseRecyclerAdapter);
+
+        /**
+         * swipe and delete
+         */
+        ItemTouchHelper.SimpleCallback simpleItemCallback =
+                new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                        return false;
+                    }
+
+                    @Override
+                    public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int i) {
+
+
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                mRecycleSchedule.getLayoutParams());
+
+                        deleteDialog = new DeleteDialog(getContext(),params);
+
+                        deleteDialog.setTitle("Careful!!!");
+                        deleteDialog.setMessage("Are you going to remove");
+                        deleteDialog.setYesOnclickListener("YES", new DeleteDialog.onYesOnclickListener() {
+                            @Override
+                            public void onYesClick() {
+
+                                Toast.makeText(getContext(), "Successufully removed ", Toast.LENGTH_SHORT).show();
+                                //Remove swiped item from list and notify the RecyclerView
+                                final int position = viewHolder.getAdapterPosition();
+
+                                firebaseRecyclerAdapter.getRef(position).removeValue();
+
+                                deleteDialog.dismiss();
+
+                            }
+                        });
+                        deleteDialog.setNoOnclickListener("NO", new DeleteDialog.onNoOnclickListener() {
+                            @Override
+                            public void onNoClick() {
+
+                                deleteDialog.dismiss();
+                            }
+                        });
+
+                        deleteDialog.show();
+
+                    }
+                };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemCallback);
+        itemTouchHelper.attachToRecyclerView(mRecycleSchedule);
+
+
 
     }
 
@@ -185,17 +245,6 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
             Toast.makeText(getActivity(), "You haven't add any events to your schedule", Toast.LENGTH_LONG).show();
         }
     }
-
-    // can not resolve onBackPressed in fragment
-//    @Override
-//    public void onBackPressed() {
-//        DrawerLayout drawer = getView().findViewById(R.id.drawer_layout);
-//        if (drawer.isDrawerOpen(GravityCompat.START)) {
-//            drawer.closeDrawer(GravityCompat.START);
-//        } else {
-//            super.onBackPressed();
-//        }
-//    }
 
     private void toLogin() {
         Intent intent = new Intent(getActivity(), LoginActivity.class);

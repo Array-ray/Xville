@@ -24,4 +24,15 @@
                      Activity time: 23 July 2019, 6pm-8pm
                      Activity place: B1 G10</string>
     <string name="loading">I\'m hurry on, my master...</string>
+
+
+
+    <style name="DeleteDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
 </resources>
