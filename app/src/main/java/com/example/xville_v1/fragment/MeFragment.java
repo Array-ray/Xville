@@ -103,6 +103,8 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         //intialization the view
         initView();
 
+        //Get the list of event title the user add under his/her Student ID
+        getScheduleList();
 
     }
 
@@ -110,8 +112,6 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     public void onStart() {
         super.onStart();
 
-        //Get the list of event title the user add under his/her Student ID
-        getScheduleList();
 
         //Populate the event schedule view
         populateRecyclerEvent();
@@ -168,10 +168,13 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
             mReadScheRef.child(userID).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    //Clear all the items in array list
+                    scheduleList.clear();
                     //User for loop to add the children of one particular user
                     for (DataSnapshot titleSnapshot: dataSnapshot.getChildren()){
                         scheduleList.add(titleSnapshot.getValue(String.class));
                     }
+
                 }
 
                 @Override
