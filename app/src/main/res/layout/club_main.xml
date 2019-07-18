@@ -38,15 +38,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_anchor="@id/iv"
-
+        app:layout_behavior=".behavior.TranslucentBehavior"
         app:navigationIcon="@drawable/ic_arrow_back" />
 
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_gravity="center_horizontal"
         android:elevation="5dp"
         android:src="@mipmap/logo"
-        app:layout_anchor="@id/iv" />
+        app:layout_anchor="@id/iv"
+        app:layout_behavior=".behavior.TransferHeaderBehavior"/>
 </android.support.design.widget.CoordinatorLayout>
 

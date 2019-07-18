@@ -107,7 +107,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        getScheduleList();
+
         //intialization the view
         initView();
 
@@ -119,20 +119,23 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         super.onStart();
 
         //Get a list of event title
-        //Populate the event schedule view
-        populateRecyclerEvent();
+//        getScheduleList();
 
+        //Populate the event schedule view
+        //Firebase database
+        mScheduleRef = FirebaseDatabase.getInstance().getReference().child("Schedule");
+        if(mScheduleRef.child(userID) != null){
+            populateRecyclerEvent();
+        }
     }
 
     private void populateRecyclerEvent() {
 
-        //Firebase database
-        mScheduleRef = FirebaseDatabase.getInstance().getReference().child("Events");
-
         //Query, filter the event held today, filter time
         mQueryschedule = FirebaseDatabase.getInstance()
                 .getReference()
-                .child("Events")
+                .child("Schedule")
+                .child(userID)
                 .limitToLast(50);
 
         //New an option, bind the query and data model
@@ -147,9 +150,9 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
                     @Override
                     protected void onBindViewHolder(@NonNull ScheduleVertiHolder holder, int position, @NonNull Event model) {
-                        if(scheduleList.contains(model.getTitle())){
+                        //if(scheduleList.contains(model.getTitle())){
                             holder.setScheduleTitle(model.getTitle());
-                        }
+                        //}
                     }
 
                     @NonNull
@@ -215,7 +218,6 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemCallback);
         itemTouchHelper.attachToRecyclerView(mRecycleSchedule);
-
 
 
     }

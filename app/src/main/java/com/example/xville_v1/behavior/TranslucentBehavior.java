@@ -3,10 +3,10 @@ package com.example.xville_v1.behavior;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 public class TranslucentBehavior extends CoordinatorLayout.Behavior<Toolbar>{
 
@@ -46,7 +46,7 @@ public class TranslucentBehavior extends CoordinatorLayout.Behavior<Toolbar>{
 
 
         //set the backgroundcolor
-        child.setBackgroundColor(Color.argb((int) alpha, 63, 81, 181));
+        child.setBackgroundColor(Color.argb((int) alpha, 251, 192, 45));
 
         return true;
     }
