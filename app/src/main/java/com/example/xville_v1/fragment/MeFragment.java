@@ -63,7 +63,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     private Query mQueryschedule;
 
     //Title list stored in Schdule in firebase
-    List<String> scheduleList;
+    private List<String> scheduleList;
 
     @Nullable
     @Override
@@ -100,11 +100,10 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        getScheduleList();
         //intialization the view
         initView();
 
-        //Get the list of event title the user add under his/her Student ID
-        getScheduleList();
 
     }
 
@@ -112,7 +111,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     public void onStart() {
         super.onStart();
 
-
+        //Get a list of event title
         //Populate the event schedule view
         populateRecyclerEvent();
 

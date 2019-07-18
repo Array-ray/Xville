@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="40dp"
     android:orientation="vertical"
-    tools:context=".authentication.LoginActivity">
+    tools:context=".authentication.LoginAsClub">
 
     <TextView
         android:layout_width="wrap_content"
@@ -47,13 +47,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New to this? Click here to"/>
+
         <TextView
             android:id="@+id/tv_SignUpClub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" Sign up"
             android:textColor="@color/colorAccent"
-            android:onClick="goRegister"/>
+            android:onClick="toClubSignUp"/>
     </LinearLayout>
 
     <Button

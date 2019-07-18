@@ -10,58 +10,57 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="#f5f5f5">
 
         <LinearLayout
-        android:id="@+id/schedule_header"
-        android:layout_width="wrap_content"
-        android:layout_height="101dp"
-        android:orientation="horizontal"
-        android:paddingTop="5dp"
-        android:paddingLeft="15dp">
-
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:src="@drawable/avatar" />
-        <TextView
+            android:id="@+id/schedule_header"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Jimmy"
-            android:textSize="25sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:textStyle="bold"
-            android:textColor="#FF9800"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="25dp"
-            android:text="July"
-            android:textColor="#000"
-            android:textSize="40sp"
-            android:textStyle="bold" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="25dp"
-            android:text="2019"
-            android:textColor="#6D6C6C"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-    </LinearLayout>
+            android:layout_height="101dp"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingLeft="15dp">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/avatar" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jimmy"
+                android:textSize="25sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"
+                android:textColor="#FF9800"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="25dp"
+                android:text="July"
+                android:textColor="#000"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="25dp"
+                android:text="2019"
+                android:textColor="#6D6C6C"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/schedule_recycler"
             android:layout_below="@id/schedule_header"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-
 
     </RelativeLayout>
 

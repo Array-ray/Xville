@@ -21,7 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class LoginAsClub extends AppCompatActivity implements View.OnClickListener{
+public class LoginAsClub extends AppCompatActivity{
 
     //xml views
     private EditText clubName;
@@ -43,19 +43,17 @@ public class LoginAsClub extends AppCompatActivity implements View.OnClickListen
 
         //Buttons
         clubLogin = findViewById(R.id.btn_lgAsClub);
-        toSignUp = findViewById(R.id.tv_SignUpClub);
+
+        //Click the button to login
+        clubLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginAsClub(clubName.getText().toString().trim(), clubpwd.getText().toString().trim());
+            }
+        });
 
     }
 
-    @Override
-    public void onClick(View v) {
-        int i = v.getId();
-        if (i == R.id.tv_SignUpClub) {
-            toClubSignUp();
-        } else if (i == R.id.btn_lgAsClub) {
-            loginAsClub(clubName.getText().toString().trim(), clubpwd.getText().toString().trim());
-        }
-    }
 
     private void loginAsClub(String cn, final String cpwd) {
 
@@ -80,12 +78,11 @@ public class LoginAsClub extends AppCompatActivity implements View.OnClickListen
 
         //check if the club name is not null, then compare the password
         if(ref.child(cn) != null){
-            ref.child(cn).addValueEventListener(new ValueEventListener() {
+            ref.child(cn).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     Club club = dataSnapshot.getValue(Club.class);
-//                    Log.v("show pwd2", pwd);
-//                    Log.v("show user password", user.getPassword());
+//
                     if (cpwd.equals(club.getPassword())){
                         Toast.makeText(LoginAsClub.this, "Login successful", Toast.LENGTH_LONG).show();
                         toClubMainPage();
@@ -115,7 +112,7 @@ public class LoginAsClub extends AppCompatActivity implements View.OnClickListen
     }
 
 
-    private void toClubSignUp() {
+    public void toClubSignUp(View view) {
         Intent intent = new Intent(this, RegisterAsClub.class);
         startActivity(intent);
         finish();

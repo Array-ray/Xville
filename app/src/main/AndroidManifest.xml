@@ -20,6 +20,7 @@
         <activity android:name=".authentication.LoginAsClub"/>
         <activity android:name=".authentication.RegisterAsClub"/>
         <activity android:name=".EventDetailActivity"/>
+        <activity android:name=".ClubMainActivity"/>
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
