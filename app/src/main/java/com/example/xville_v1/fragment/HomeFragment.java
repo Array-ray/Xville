@@ -2,6 +2,7 @@ package com.example.xville_v1.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +21,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.xville_v1.Adapter.EventsVertiHolder;
+import com.example.xville_v1.EventDetailActivity;
 import com.example.xville_v1.Model.Event;
 import com.example.xville_v1.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -32,13 +35,16 @@ import java.util.List;
 
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
+    //Bundle and intent, from login activity
+    private String userID;
+    private String userName;
+
     //Views
     protected Toolbar toolbar;
     private RecyclerView mRecycleHorizontal;
     private RecyclerView mRecycleVertical;
 
     //Category button
-
 
     //Firebase
     //database reference (point to the specific child)
@@ -55,18 +61,31 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     List<Event> events;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_home, container, false);
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        userID = getArguments().getString("USERID");
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+
         //find the activity
+        mActivity = getActivity();
+        mAppCompatActivity = (AppCompatActivity) mActivity;
+
+        //initialize the toolbar
+        toolbar = getView().findViewById(R.id.toolbar);
+        mAppCompatActivity.setSupportActionBar(toolbar);//find the activity
         mActivity = getActivity();
         mAppCompatActivity = (AppCompatActivity) mActivity;
 
@@ -86,15 +105,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         //Vertical
         mRecycleVertical.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
     }
 
     @Override
     public void onStart() {
         super.onStart();
+        toolbar.setTitle("Browse");
 
         //Firebase database
         mEventHori = FirebaseDatabase.getInstance().getReference().child("Events");
+        mEventVerti = FirebaseDatabase.getInstance().getReference().child("Events");
 
         //Query, filter the event held today, filter time
         mQueryhori = FirebaseDatabase.getInstance()
@@ -102,8 +122,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 .child("Events")
                 .limitToLast(50);
 
+        mQueryVerti = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("Events")
+                .limitToLast(50);
+
         //populate horizontal recyclerview
         populateHorizontalEvent(mQueryhori);
+        populateVerticalEvent(mQueryVerti);
     }
 
     private void populateHorizontalEvent(Query mQueryhori) {
@@ -120,6 +146,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                     @Override
                     protected void onBindViewHolder(@NonNull HomeFragment.EventsHoriHolder holder, int position, @NonNull Event model) {
                         holder.FillinHolder(getContext(), model.getImg());
+                        final String tmp = model.getTitle();
+                        holder.getEventsHoriCard().setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent i = new Intent(getActivity().getApplicationContext(), EventDetailActivity.class);
+                                i.putExtra("EventName", tmp);
+                                i.putExtra("UserId", userID);
+                                getActivity().startActivity(i);
+                            }
+                        });
                     }
 
                     @NonNull
@@ -138,7 +174,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         Toast.makeText(getActivity(),"Started display", Toast.LENGTH_LONG).show();
     }
 
-    protected static class EventsHoriHolder extends RecyclerView.ViewHolder{
+    protected static class EventsHoriHolder extends RecyclerView.ViewHolder {
 
         //myView for view holder
         View mView;
@@ -162,13 +198,48 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             Glide.with(ctx).load(img).placeholder(R.drawable.common_full_open_on_phone).into(poster);
             //Picasso.get().load(model.getImg()).placeholder(R.drawable.common_full_open_on_phone).into(holder.clubImage);
         }
+
+        public CardView getEventsHoriCard(){
+            return card;
+        }
+    }
+
+    private void populateVerticalEvent(Query mQueryVerti) {
+        //New an option, bind the query and data model
+        FirebaseRecyclerOptions<Event> options =
+                new FirebaseRecyclerOptions.Builder<Event>()
+                        .setQuery(mQueryVerti, Event.class)
+                        .build();
+
+        //New an adapter. Override two methods
+        FirebaseRecyclerAdapter<Event, EventsVertiHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Event, EventsVertiHolder>(options) {
+
+                    @Override
+                    protected void onBindViewHolder(@NonNull EventsVertiHolder holder, int position, @NonNull Event model) {
+                        holder.FillinHolder(getContext(), model.getImg(), model.getTitle(),
+                                model.getHeldbyClub(),model.getTime(),model.getLocation());
+                    }
+
+                    @NonNull
+                    @Override
+                    public EventsVertiHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                        View view = LayoutInflater.from(viewGroup.getContext())
+                                .inflate(R.layout.item_listevent, viewGroup, false);
+                        return new EventsVertiHolder(view);
+                    }
+                };
+
+        //Set adapter
+        firebaseRecyclerAdapter.startListening();
+        mRecycleVertical.setAdapter(firebaseRecyclerAdapter);
     }
 
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        inflater.inflate(R.menu.action_search, menu);
+        inflater.inflate(R.menu.search, menu);
         super.onCreateOptionsMenu(menu,inflater);
     }
 
@@ -176,6 +247,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
 
     }
+
+
 
 
 //    private void initView() {

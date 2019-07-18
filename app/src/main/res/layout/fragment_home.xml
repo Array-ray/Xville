@@ -8,121 +8,119 @@
     <include layout="@layout/appbar_yellowtopbar"
         android:id="@+id/appbar_home"/>
 
-
-    <LinearLayout
-        android:id="@+id/main_body"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/appbar_home"
-        android:layout_marginLeft="@dimen/main_page_margin"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_gravity="fill_vertical"
+        android:layout_below="@id/appbar_home">
 
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/main_page_margin"
-            android:orientation="horizontal"
-            android:paddingTop="16dp"
-            android:paddingBottom="8dp">
+            android:background="#f5f5f5">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/main_body"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_bold"
-                android:text="Comming soon"
-                android:textColor="#000"
-                android:textSize="24sp" />
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:text="week"
-                android:textSize="18sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/main_page_margin"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/main_page_margin"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="8dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:text="month"
-                android:textSize="18sp" />
-        </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="Comming soon"
+                        android:textColor="#000"
+                        android:textSize="24sp" />
+                </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycle_event_hori"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycle_event_hori"
+                    android:layout_marginLeft="@dimen/main_page_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
 
-        </android.support.v7.widget.RecyclerView>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="24dp"
-            android:paddingBottom="16dp"
-            android:text="Category"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_marginRight="24dp"
-                android:background="@drawable/btn_category_circle"
-                android:src="@drawable/ic_cate_festival" />
-
-            <ImageView
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_marginRight="24dp"
-                android:background="@drawable/btn_category_circle"
-                android:src="@drawable/ic_cate_performance" />
-
-            <ImageView
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_marginRight="24dp"
-                android:background="@drawable/btn_category_circle"
-                android:src="@drawable/ic_cate_workshop" />
-
-            <ImageView
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_marginRight="24dp"
-                android:background="@drawable/btn_category_circle"
-                android:src="@drawable/ic_cate_competition" />
-
-            <ImageView
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_marginRight="0dp"
-                android:background="@drawable/btn_category_circle"
-                android:src="@drawable/ic_cate_exibition" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="8dp"
-            android:text="Rank"
-            android:textSize="15dp" />
-    </LinearLayout>
+                </android.support.v7.widget.RecyclerView>
 
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="4dp"
+                    android:layout_marginLeft="@dimen/main_page_margin"
+                    android:text="Category"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/main_page_margin">
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_below="@id/main_body"
-        android:id="@+id/recycle_event_verti"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/main_page_margin"
-        android:layout_marginLeft="16dp">
+                    <ImageView
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:layout_marginRight="24dp"
+                        android:background="@drawable/btn_category_circle"
+                        android:src="@drawable/ic_cate_festival" />
 
-    </android.support.v7.widget.RecyclerView>
+                    <ImageView
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:layout_marginRight="24dp"
+                        android:background="@drawable/btn_category_circle"
+                        android:src="@drawable/ic_cate_performance" />
+
+                    <ImageView
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:layout_marginRight="24dp"
+                        android:background="@drawable/btn_category_circle"
+                        android:src="@drawable/ic_cate_workshop" />
+
+                    <ImageView
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:layout_marginRight="24dp"
+                        android:background="@drawable/btn_category_circle"
+                        android:src="@drawable/ic_cate_competition" />
+
+                    <ImageView
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:layout_marginRight="0dp"
+                        android:background="@drawable/btn_category_circle"
+                        android:src="@drawable/ic_cate_exibition" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="@dimen/main_page_margin"
+                    android:text="Rank"
+                    android:textSize="15dp" />
+            </LinearLayout>
+
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_below="@id/main_body"
+                android:id="@+id/recycle_event_verti"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
 </RelativeLayout>

@@ -15,6 +15,9 @@ public class MainActivity extends AppCompatActivity {
 
     protected BottomNavigationView mBottomNav;
 
+    //Bundle for receive data
+    private Bundle bundle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +26,18 @@ public class MainActivity extends AppCompatActivity {
 
         initView();
         mBottomNav.setOnNavigationItemSelectedListener(navListener);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new HomeFragment()).commit();
 
+        //GET data from intent
+        Bundle extras = getIntent().getExtras();
+        String userID = extras.getString("USERID");
+
+        //using Bundle to send data
+        bundle = new Bundle();
+        bundle.putString("USERID", userID);
+        HomeFragment defaultFragment = new HomeFragment();
+        defaultFragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                defaultFragment).commit();
     }
 
     //navigation
@@ -38,14 +50,17 @@ public class MainActivity extends AppCompatActivity {
                     switch (menuItem.getItemId()) {
                         case R.id.bottom_nav_home:
                             selectedFragment = new HomeFragment();
+                            selectedFragment.setArguments(bundle);
                             break;
 
                         case R.id.bottom_nav_club:
                             selectedFragment = new ClubFragment();
+                            selectedFragment.setArguments(bundle);
                             break;
 
                         case R.id.bottom_nav_me:
                             selectedFragment = new MeFragment();
+                            selectedFragment.setArguments(bundle);
                             break;
                     }
 

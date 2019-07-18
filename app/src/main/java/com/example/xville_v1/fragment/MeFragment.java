@@ -11,6 +11,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,24 +20,62 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.example.xville_v1.authentication.LoginActivity;
+import com.example.xville_v1.Adapter.ScheduleVertiHolder;
+import com.example.xville_v1.Model.Event;
 import com.example.xville_v1.R;
+import com.example.xville_v1.authentication.LoginActivity;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MeFragment extends Fragment implements NavigationView.OnNavigationItemSelectedListener{
 
+    //Activity
     private Activity mActivity;
     private AppCompatActivity mAppCompatActivity;
 
+    //Get bundle data
+    private String userID;
+    private String userName;
+
+    //View
     protected Toolbar toolbar;
     private DrawerLayout drawer;
     private NavigationView navigationView;
+    private RecyclerView mRecycleSchedule;
+
+    //Firebase
+    //database reference (point to the specific child)
+    private DatabaseReference mScheduleRef;
+    private DatabaseReference mReadScheRef; // for reading the Schedule child in firebase
+
+    //query
+    private Query mQueryschedule;
+
+    //Title list stored in Schdule in firebase
+    List<String> scheduleList;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.drawer_me_schedule, container, false);
 
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        userID = getArguments().getString("USERID");
     }
 
     @Override
@@ -49,6 +89,7 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         //initialize the toolbar
         toolbar = getView().findViewById(R.id.toolbar);
         mAppCompatActivity.setSupportActionBar(toolbar);
+        toolbar.setTitle("Schedule");
 
         //inflate the drawer and navigationview to the current view
         drawer = getView().findViewById(R.id.drawer_layout);
@@ -59,8 +100,88 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        //intialization the view
         initView();
 
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        //Get the list of event title the user add under his/her Student ID
+        getScheduleList();
+
+        //Populate the event schedule view
+        populateRecyclerEvent();
+
+    }
+
+    private void populateRecyclerEvent() {
+
+        //Firebase database
+        mScheduleRef = FirebaseDatabase.getInstance().getReference().child("Events");
+
+        //Query, filter the event held today, filter time
+        mQueryschedule = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("Events")
+                .limitToLast(50);
+
+        //New an option, bind the query and data model
+        FirebaseRecyclerOptions<Event> options =
+                new FirebaseRecyclerOptions.Builder<Event>()
+                        .setQuery(mQueryschedule, Event.class)
+                        .build();
+
+
+        FirebaseRecyclerAdapter<Event, ScheduleVertiHolder> firebaseRecyclerAdapter =
+                new FirebaseRecyclerAdapter<Event, ScheduleVertiHolder>(options) {
+
+                    @Override
+                    protected void onBindViewHolder(@NonNull ScheduleVertiHolder holder, int position, @NonNull Event model) {
+                        if(scheduleList.contains(model.getTitle())){
+                            holder.setScheduleTitle(model.getTitle());
+                        }
+                    }
+
+                    @NonNull
+                    @Override
+                    public ScheduleVertiHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                        View view = LayoutInflater.from(viewGroup.getContext())
+                                .inflate(R.layout.item_listschedule, viewGroup, false);
+                        return new ScheduleVertiHolder(view);
+                    }
+                };
+
+        //Set adapter
+        firebaseRecyclerAdapter.startListening();
+        mRecycleSchedule.setAdapter(firebaseRecyclerAdapter);
+
+    }
+
+    private void getScheduleList() {
+        scheduleList = new ArrayList<>();
+        mReadScheRef = FirebaseDatabase.getInstance().getReference().child("Schedule");
+        if(mReadScheRef.child(userID) != null){
+            mReadScheRef.child(userID).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    //User for loop to add the children of one particular user
+                    for (DataSnapshot titleSnapshot: dataSnapshot.getChildren()){
+                        scheduleList.add(titleSnapshot.getValue(String.class));
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(getActivity(), "Datasnapshop error", Toast.LENGTH_LONG).show();
+                }
+            });
+        }else{
+            Toast.makeText(getActivity(), "You haven't add any events to your schedule", Toast.LENGTH_LONG).show();
+        }
     }
 
     // can not resolve onBackPressed in fragment
@@ -81,6 +202,8 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     }
 
     private void initView() {
+        mRecycleSchedule = getView().findViewById(R.id.schedule_recycler);
+        mRecycleSchedule.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 
     @Override
@@ -126,9 +249,4 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-
-
 }

@@ -27,6 +27,7 @@
         tools:layout_editor_absoluteX="98dp"
         tools:layout_editor_absoluteY="263dp" />
 
+
     <EditText
         android:id="@+id/ID"
         android:layout_width="match_parent"
@@ -35,16 +36,34 @@
         android:hint="Student ID / Staff ID"
         android:layout_marginTop="30dp"/>
 
-    <EditText
-        android:id="@+id/Email"
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="Email address"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp">
+        <EditText
+            android:id="@+id/et_email_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="Email address" />
+
+        <Button
+            android:id="@+id/btn_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/border_searchbox"
+            android:padding="4dp"
+            android:textSize="12sp"
+            android:textColor="#95989A"
+            android:text="Send" />
+
+    </FrameLayout>
 
     <EditText
-        android:id="@+id/Password"
+        android:id="@+id/et_pwd_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
@@ -52,7 +71,7 @@
         android:layout_marginTop="30dp"/>
 
     <Button
-        android:id="@+id/signUpButton"
+        android:id="@+id/btn_signup_user"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="center"

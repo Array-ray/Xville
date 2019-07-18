@@ -28,7 +28,7 @@ dependencies {
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
-    //fitrebase
+    //firebase
     implementation 'com.google.firebase:firebase-auth:17.0.0'
     implementation 'com.google.firebase:firebase-core:16.0.9'
     implementation 'com.google.firebase:firebase-database:17.0.0'
@@ -51,4 +51,8 @@ dependencies {
 
     //swipe to delete
     implementation "com.daimajia.swipelayout:library:1.2.0@aar"
+
+    //pdf viewer
+    implementation 'com.github.barteksc:android-pdf-viewer:3.1.0-beta.1'
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 }

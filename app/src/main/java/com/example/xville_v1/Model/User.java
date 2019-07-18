@@ -1,8 +1,8 @@
 package com.example.xville_v1.Model;
 
 public class User {
-    private String Username;
-    private String Email;
+    private String username;
+    private String email;
     private String ID;
     private String password;
 
@@ -11,26 +11,26 @@ public class User {
     }
 
     public User(String username, String email, String ID, String password) {
-        Username = username;
-        Email = email;
+        this.username = username;
+        this.email = email;
         this.ID = ID;
         this.password = password;
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public String getID() {

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="4dp"
         app:cardMaxElevation="2dp"
-        app:cardElevation="4dp"
+        android:elevation="8dp"
         android:layout_centerInParent="true">
 
         <ImageView

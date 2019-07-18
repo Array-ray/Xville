@@ -1,24 +1,22 @@
 package com.example.xville_v1.Model;
 
-import java.util.ArrayList;
-
 public class Event{
-    private String eventid;
+
     private String title;
     private String time;
     private String location;
-    private String about;
+    private String about; //the url where store the pdf
     private String type;
     private String img;
 
-    private ArrayList<String> heldbyClub;
-    private ArrayList<String> addbyUser;
+    private String heldbyClub;
+//    private ArrayList<String> addbyUser;
 
     public Event() {
     }
 
-    public Event(String eventid, String title, String time, String location, String about, String type, String img, ArrayList<String> heldbyClub, ArrayList<String> addbyUser) {
-        this.eventid = eventid;
+    public Event(String title, String time, String location, String about, String type, String img, String heldbyClub) {
+
         this.title = title;
         this.time = time;
         this.location = location;
@@ -26,16 +24,9 @@ public class Event{
         this.type = type;
         this.img = img;
         this.heldbyClub = heldbyClub;
-        this.addbyUser = addbyUser;
     }
 
-    public String getEventid() {
-        return eventid;
-    }
 
-    public void setEventid(String eventid) {
-        this.eventid = eventid;
-    }
 
     public String getTitle() {
         return title;
@@ -85,23 +76,11 @@ public class Event{
         this.img = img;
     }
 
-    public ArrayList<String> getHeldbyClub() {
+    public String getHeldbyClub() {
         return heldbyClub;
     }
 
-    public void setHeldbyClub(ArrayList<String> heldbyClub) {
+    public void setHeldbyClub(String heldbyClub) {
         this.heldbyClub = heldbyClub;
-    }
-
-    public ArrayList<String> getAddbyUser() {
-        return addbyUser;
-    }
-
-    public void setAddbyUser(ArrayList<String> addbyUser) {
-        this.addbyUser = addbyUser;
-    }
-
-    public void addedByUser(String userid){
-        addbyUser.add(userid);
     }
 }

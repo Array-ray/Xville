@@ -16,7 +16,7 @@ public class SplashActivity extends AppCompatActivity {
     private Runnable mRunnableToLogin = new Runnable() {
         @Override
         public void run() {
-            toMainActivity();
+            toLoginActivity();
         }
     };
 

@@ -13,8 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.xville_v1.MainActivity;
-import com.example.xville_v1.R;
 import com.example.xville_v1.Model.User;
+import com.example.xville_v1.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -83,12 +83,12 @@ public class LoginActivity extends AppCompatActivity {
             ref.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    User user = dataSnapshot.getValue(User.class);
+                    User luser = dataSnapshot.getValue(User.class);
 //                    Log.v("show pwd2", pwd);
-//                    Log.v("show user password", user.getPassword());
-                    if (pwd.equals(user.getPassword())){
+//
+                    if (pwd.equals(luser.getPassword())){
                         Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_LONG).show();
-                        toHomeActivity();
+                        toHomeFragment();
                     } else {
                         //System.out.println("The read failed: " + databaseError.getCode());
                         Toast.makeText(LoginActivity.this, "The password is incorrect", Toast.LENGTH_LONG).show();
@@ -101,13 +101,28 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }else{
-            Toast.makeText(LoginActivity.this, "User does not exist", Toast.LENGTH_LONG).show();
+            Toast.makeText(LoginActivity.this, "User does not exist,Please sign up first", Toast.LENGTH_LONG).show();
         }
     }
 
-    private void toHomeActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    private void toHomeFragment() {
+
+        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+        i.putExtra("USERID",mID.getText().toString().trim());
+        startActivity(i);
+        finish();
+
+//        //using Bundle to send data
+//        Bundle bundle = new Bundle();
+//        bundle.putString("USERID", mID.getText().toString().trim());
+//
+//        //new one fragment and put data into fragment
+//        //new one fragment manager
+//        //new one fragment transaction
+//        HomeFragment homeFragment = new HomeFragment();
+//        homeFragment.setArguments(bundle);
+//        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+//                homeFragment).commit();
     }
 
     private void initView() {

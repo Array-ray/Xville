@@ -1,12 +1,12 @@
 package com.example.xville_v1.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,12 +15,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.example.xville_v1.Model.Club;
 import com.example.xville_v1.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
@@ -29,74 +31,77 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ClubFragment extends Fragment{
 
     //Views
-    private View mclubsView;
     private RecyclerView mRecycleList;
     private ImageView moment;
+    private Toolbar toolbar;
 
     //Firebase
-    Query ClubRef;
+    private DatabaseReference ClubRef;
+    //query
+    private Query mQueryclub;
 
+    //Activity
+    private Activity mActivity;
+    private AppCompatActivity mAppCompatActivity;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        mclubsView = inflater.inflate(R.layout.fragment_club, container, false);
-        return mclubsView;
+        return inflater.inflate(R.layout.fragment_club, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //RecycleView for club list
+        //find the activity
+        mActivity = getActivity();
+        mAppCompatActivity = (AppCompatActivity) mActivity;
+
+        //initialize the toolbar
+        toolbar = getView().findViewById(R.id.toolbar);
+        mAppCompatActivity.setSupportActionBar(toolbar);//find the activity
+        mActivity = getActivity();
+        mAppCompatActivity = (AppCompatActivity) mActivity;
+
+        //initialize the toolbar
+        toolbar = getView().findViewById(R.id.toolbar);
+        mAppCompatActivity.setSupportActionBar(toolbar);
+
+        //RecycleView
         mRecycleList = getView().findViewById(R.id.recycle_club_list);
-//        mRecycleList.setHasFixedSize(true);
-        mRecycleList.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecycleList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        //Firebase database
-        ClubRef = FirebaseDatabase.getInstance().getReference().child("Clubs");
-
-        //jump to the club moment
+        //icon for jumping to the club moment
         moment = getView().findViewById(R.id.imv_moment);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        firebaseClubDisplay();
+        toolbar.setTitle("Club");
 
-        moment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //used for jump to activity
-//                Intent intent = new Intent(getActivity(), ClubMomentActivity.class);
-//                startActivity(intent);
+        //Firebase database
+        ClubRef = FirebaseDatabase.getInstance().getReference().child("Clubs");
 
-                //used for jump to fragment
-                Fragment fragment = new ClubMomentFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.content_frame, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
-    }
+        //Query
+        mQueryclub = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("Clubs")
+                .limitToLast(50);
 
-
-    public void firebaseClubDisplay() {
+        //Option
         FirebaseRecyclerOptions<Club> options =
                 new FirebaseRecyclerOptions.Builder<Club>()
-                        .setQuery(ClubRef, Club.class)
+                        .setQuery(mQueryclub, Club.class)
                         .build();
 
+        //Firebase Recycler adapter
         FirebaseRecyclerAdapter<Club, ClubsViewHolder> firebaseRecyclerAdapter =
                 new FirebaseRecyclerAdapter<Club, ClubsViewHolder>(options) {
                     @Override
                     protected void onBindViewHolder(@NonNull ClubsViewHolder holder, int position, @NonNull Club model) {
-                        TextView cn = getView().findViewById(R.id.tv_club_name);
-                        cn.setText(model.getName());
                         holder.FillinHolder(getContext(),model.getName(),model.getBrief(), model.getImg());
                     }
 
@@ -110,50 +115,52 @@ public class ClubFragment extends Fragment{
                     }
                 };
 
-
-
-
-        //bind the firebaseRecyclerAdapter to the Recyclelist
         firebaseRecyclerAdapter.startListening();
         mRecycleList.setAdapter(firebaseRecyclerAdapter);
 
-        Toast.makeText(getActivity(),"Started display", Toast.LENGTH_LONG).show();
 
-    }
+//        moment.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                used for jump to activity
+//                Intent intent = new Intent(getActivity(), ClubMomentActivity.class);
+//                startActivity(intent);
+//
+//                used for jump to fragment
+//                Fragment fragment = new ClubMomentFragment();
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.content_frame, fragment);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.commit();
+//            }
+//        });
+  }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
 
     //Holder to hold the view for one club in the list, should be the static class
     public static class ClubsViewHolder extends RecyclerView.ViewHolder{
 
         private TextView clubName, clubBrief;
         private CircleImageView clubImage;
-        View mView;
-//
+        private View mView;
+
 
         //Binding the view with ID in xml layout resource
         public ClubsViewHolder(@NonNull View itemView) {
             super(itemView);
             mView = itemView;
-        }
-
-        public void FillinHolder(Context ctx, String name, String brief, String img){
             clubName= mView.findViewById(R.id.tv_club_name);
             clubBrief= mView.findViewById(R.id.tv_club_brief);
             clubImage= mView.findViewById(R.id.iv_club_profile_img);
+        }
 
+        public void FillinHolder(Context ctx, String name, String brief, String img) {
             clubName.setText(name);
             clubBrief.setText(brief);
             Glide.with(ctx).load(img).placeholder(R.drawable.common_full_open_on_phone).into(clubImage);
-            //Picasso.get().load(model.getImg()).placeholder(R.drawable.common_full_open_on_phone).into(holder.clubImage);
-            Toast.makeText(ctx,"iTEMS SHOW", Toast.LENGTH_LONG).show();
+            Toast.makeText(ctx, "iTEMS SHOW", Toast.LENGTH_LONG).show();
         }
-
-
-
     }
 
 
