@@ -38,10 +38,9 @@ public class SearchActivity extends AppCompatActivity {
 
         initView();
 
-        //get the transferred data
-        Bundle bundle = this.getIntent().getExtras();
-
-        searchContent = bundle.getString("searchContent");
+        textViewSeachContent = findViewById(R.id.activity_search_content);
+        //show the transferred data
+        textViewSeachContent.setText(searchContent);
 
         readItems(searchContent);
     }
@@ -89,7 +88,7 @@ public class SearchActivity extends AppCompatActivity {
         //display header
       //  setUpToolbar();
         //display title in header
-        setTitle("Search Result");
+       // setTitle("Search Result");
 
         mSearchListRecycleView = findViewById(R.id.search_event_recyclerviewer);
 
@@ -99,7 +98,7 @@ public class SearchActivity extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);
         mSearchListRecycleView.setLayoutManager(linearLayoutManager);
 
-        eventDatabaseRef = FirebaseDatabase.getInstance().getReference("Events");
+        eventDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Events");
     }
 
 

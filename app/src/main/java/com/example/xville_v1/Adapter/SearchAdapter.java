@@ -41,6 +41,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ItemViewHo
         holder.mTextViewPos_heldByClub.setText(event.getHeldbyClub());
         holder.mTextViewPos_location.setText(event.getLocation());
         Glide.with(mContext).load(event.getImg()).into(holder.mImageViewList_poster);
+
+
     }
 
     @Override
@@ -71,7 +73,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ItemViewHo
             mTextViewPos_title = (TextView)itemView.findViewById(R.id.pos_title);
             mTextViewPos_heldByClub = (TextView)itemView.findViewById(R.id.pos_heldByClub);
             mTextViewPos_location = (TextView)itemView.findViewById(R.id.pos_location);
-
         }
 
     }

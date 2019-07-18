@@ -8,8 +8,8 @@ public class Event{
     private String about; //the url where store the pdf
     private String type;
     private String img;
-
     private String heldbyClub;
+
 //    private ArrayList<String> addbyUser;
 
     public Event() {

@@ -35,6 +35,7 @@ public class EventDetailActivity extends AppCompatActivity {
     //View
     protected Toolbar toolbar;
     private ImageView poster;
+
     private TextView title;
     private TextView time;
     private TextView location;
@@ -82,6 +83,7 @@ public class EventDetailActivity extends AppCompatActivity {
         location = findViewById(R.id.event_location);
         pdfViewer = findViewById(R.id.pdf_viewer);
 
+
         //Firebase
         mEventRef = FirebaseDatabase.getInstance().getReference().child("Events");
         mScheduleAddRef = FirebaseDatabase.getInstance().getReference();
@@ -106,16 +108,15 @@ public class EventDetailActivity extends AppCompatActivity {
             }
         });
 
+        //load event
+        loadEvent();
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
-
-        //load event
-        loadEvent();
 
     }
 

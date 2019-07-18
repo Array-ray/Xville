@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import com.example.xville_v1.Adapter.EventsVertiHolder;
 import com.example.xville_v1.EventDetailActivity;
 import com.example.xville_v1.Model.Event;
 import com.example.xville_v1.R;
+import com.example.xville_v1.SearchActivity;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
@@ -58,6 +61,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private Activity mActivity;
     private AppCompatActivity mAppCompatActivity;
 
+    private ImageButton ImageButtonHomeSearchIcon;
+    private EditText mSearchEditText;
 
     List<Event> events;
 
@@ -97,6 +102,24 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         //View
         mRecycleHorizontal = getView().findViewById(R.id.recycle_event_hori);
         mRecycleVertical = getView().findViewById(R.id.recycle_event_verti);
+        ImageButtonHomeSearchIcon = getView().findViewById(R.id.home_search_icon);
+
+        mSearchEditText =getView().findViewById(R.id.home_search_content);
+
+        ImageButtonHomeSearchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String searchContent = mSearchEditText.getText().toString();
+
+                Intent i = new Intent(getActivity(), SearchActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("searchContent", searchContent);
+                i.putExtras(bundle);
+
+                startActivity(i);
+            }
+        });
 
         //LayoutManager (for layout purpose) and adapter
         //Horizontal

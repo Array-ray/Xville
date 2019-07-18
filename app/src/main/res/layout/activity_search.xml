@@ -4,10 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".SearchActivity">
 
     <include layout="@layout/appbar_yellowtopbar"
         android:id="@+id/appbar_home"/>
+
+    <TextView
+
+        android:id="@+id/activity_search_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:textSize="20dp"
+        android:hint="Search Content" />
 
     <ScrollView
         android:id="@+id/layout_search_items"
@@ -17,7 +30,6 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/search_event_recyclerviewer"
             android:layout_below="@id/layout_search_items"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </android.support.v7.widget.RecyclerView>
