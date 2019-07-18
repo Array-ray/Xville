@@ -219,6 +219,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                     protected void onBindViewHolder(@NonNull EventsVertiHolder holder, int position, @NonNull Event model) {
                         holder.FillinHolder(getContext(), model.getImg(), model.getTitle(),
                                 model.getHeldbyClub(),model.getTime(),model.getLocation());
+
+                        final String tmp = model.getTitle();
+                        holder.getEventsVertiHolder().setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent i = new Intent(getActivity().getApplicationContext(), EventDetailActivity.class);
+                                i.putExtra("EventName", tmp);
+                                i.putExtra("UserId", userID);
+                                getActivity().startActivity(i);
+                            }
+                        });
                     }
 
                     @NonNull

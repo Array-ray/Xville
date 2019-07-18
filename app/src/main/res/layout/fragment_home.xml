@@ -8,6 +8,13 @@
     <include layout="@layout/appbar_yellowtopbar"
         android:id="@+id/appbar_home"/>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_search"
+        android:layout_marginLeft="370dp"
+        android:layout_marginTop="20dp"/>
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

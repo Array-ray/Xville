@@ -112,7 +112,6 @@ public class EventDetailActivity extends AppCompatActivity {
             }
         });
 
-
         //load event
         loadEvent();
 
