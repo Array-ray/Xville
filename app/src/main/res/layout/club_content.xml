@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:scrollbars="none"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    app:behavior_overlapTop="20dp"
     tools:showIn="@layout/club_main">
 
     <LinearLayout
@@ -16,18 +17,107 @@
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="30dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            app:cardElevation="3dp" />
+            app:cardElevation="3dp">
 
-        <android.support.v7.widget.CardView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Photos"
+                        android:textSize="20sp"/>
+                    <TextView
+                        android:id="@+id/cp_photonumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="125"
+                        android:textSize="20sp"
+                        android:padding="10dp"
+                        android:textColor="@color/colorPrimaryDark"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Followers"
+                        android:textSize="20sp"/>
+                    <TextView
+                        android:id="@+id/cp_followersnumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="305"
+                        android:textSize="20sp"
+                        android:padding="10dp"
+                        android:textColor="@color/colorPrimaryDark"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Activities"
+                        android:textSize="20sp"/>
+                    <TextView
+                        android:id="@+id/cp_activitynumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="78"
+                        android:textSize="20sp"
+                        android:padding="10dp"
+                        android:textColor="@color/colorPrimaryDark"/>
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginBottom="40dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            app:cardElevation="3dp" />
+            android:layout_height="2dp"
+            android:background="#d8dde1"/>
+
+        <android.support.design.widget.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            app:tabMode="fixed"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabSelectedTextColor="#757575"
+            app:tabTextColor="#e0e0e0"
+            android:id="@+id/events_tab"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#d8dde1"/>
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:id="@+id/club_event_content">
+        </android.support.v4.view.ViewPager>
+
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

@@ -4,10 +4,11 @@ import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toolbar;
 
-public class TransferHeaderBehavior extends CoordinatorLayout.Behavior<ImageView> {
+import de.hdodenhof.circleimageview.CircleImageView;
+
+public class TransferHeaderBehavior extends CoordinatorLayout.Behavior<CircleImageView> {
 
     /**
      * 处于中心时候原始X轴
@@ -24,12 +25,12 @@ public class TransferHeaderBehavior extends CoordinatorLayout.Behavior<ImageView
     }
 
     @Override
-    public boolean layoutDependsOn(CoordinatorLayout parent, ImageView child, View dependency) {
+    public boolean layoutDependsOn(CoordinatorLayout parent, CircleImageView child, View dependency) {
         return dependency instanceof Toolbar;
     }
 
     @Override
-    public boolean onDependentViewChanged(CoordinatorLayout parent, ImageView child, View dependency) {
+    public boolean onDependentViewChanged(CoordinatorLayout parent, CircleImageView child, View dependency) {
         // 计算X轴坐标
         if (mOriginalHeaderX == 0) {
             this.mOriginalHeaderX = dependency.getWidth() / 2 - child.getWidth() / 2;

@@ -30,6 +30,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
+
     <include layout="@layout/club_content" />
 
     <!--layout_anchor iv 才起作用-->
@@ -41,13 +42,25 @@
         app:layout_behavior=".behavior.TranslucentBehavior"
         app:navigationIcon="@drawable/ic_arrow_back" />
 
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:padding="8dp"
         android:layout_gravity="center_horizontal"
         android:elevation="5dp"
+        android:background="@drawable/background_circle"
         android:src="@mipmap/logo"
         app:layout_anchor="@id/iv"
         app:layout_behavior=".behavior.TransferHeaderBehavior"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/create_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_margin="16dp"
+        app:maxImageSize="40dp"
+        app:srcCompat="@drawable/ic_add"/>
+
 </android.support.design.widget.CoordinatorLayout>
 

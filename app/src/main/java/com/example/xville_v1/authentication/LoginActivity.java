@@ -41,13 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser();
             }
         });
-//        /**
-//        mGoRegisterBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                toRegisterActivity();
-//            }
-//        });**/
+
     }
 
     private void toRegisterActivity() {

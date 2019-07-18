@@ -1,45 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="25dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Create my \nevent"
-        android:fontFamily="@font/roboto_black"
-        android:textSize="50sp" />
-
-    <Button
-        android:id="@+id/select_file"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:text="Select file"/>
-
-    <ImageButton
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_camera"/>
+        android:orientation="vertical"
+        android:padding="8dp">
 
-    <EditText
-        android:background="@drawable/border_inputbox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:padding="10dp"
-        android:hint="Time"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create my \nevent"
+            android:fontFamily="@font/roboto_black"
+            android:textSize="48sp" />
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/border_inputbox"
+            android:hint="Title"
+            android:padding="10dp" />
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/upload_file"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:padding="10dp"
-        android:text="upload"/>
-</LinearLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/img_placeholder_upload">
+
+            <ImageView
+                android:id="@+id/club_post"
+                android:layout_width="match_parent"
+                android:layout_height="203dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_upload" />
+        </RelativeLayout>
+            <Button
+                android:id="@+id/select_file"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="200dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Select photo"
+                android:textStyle="bold"/>
+
+        </FrameLayout>
+
+        <EditText
+            android:background="@drawable/border_inputbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="10dp"
+            android:hint="Time"/>
+
+        <EditText
+            android:background="@drawable/border_inputbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="10dp"
+            android:hint="Location"/>
+
+        <EditText
+            android:background="@drawable/border_inputbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="10dp"
+            android:hint="Type"/>
+
+        <EditText
+            android:id="@+id/post_description"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/border_inputbox"
+            android:hint="Description"
+            android:padding="10dp" />
+
+        <Button
+            android:id="@+id/upload_file"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="10dp"
+            android:layout_marginBottom="36dp"
+            android:text="upload"/>
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

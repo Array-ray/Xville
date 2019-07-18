@@ -158,7 +158,7 @@ public class ClubFragment extends Fragment{
         public void FillinHolder(Context ctx, String name, String brief, String img) {
             clubName.setText(name);
             clubBrief.setText(brief);
-            Glide.with(ctx).load(img).placeholder(R.drawable.common_full_open_on_phone).into(clubImage);
+            Glide.with(ctx).load(img).placeholder(R.mipmap.img_default_profile).into(clubImage);
             Toast.makeText(ctx, "iTEMS SHOW", Toast.LENGTH_LONG).show();
         }
     }

@@ -105,10 +105,10 @@ public class LoginAsClub extends AppCompatActivity{
     }
 
     private void toClubMainPage() {
-        Intent intent = new Intent(this, ClubMainActivity.class);
-        startActivity(intent);
+        Intent i = new Intent(LoginAsClub.this, ClubMainActivity.class);
+        i.putExtra("CLUBNAME",clubName.getText().toString().trim());
+        startActivity(i);
         finish();
-
     }
 
 

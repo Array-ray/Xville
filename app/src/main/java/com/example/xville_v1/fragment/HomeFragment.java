@@ -83,7 +83,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
         //find the activity
         mActivity = getActivity();
         mAppCompatActivity = (AppCompatActivity) mActivity;
