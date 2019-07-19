@@ -26,6 +26,7 @@ public class ClubMainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerEventsTypeAdapter adapter;
+    private ImageView mImageVIiewClubMain;
 
     //ImageView
     private ImageView posterbackground;
@@ -60,6 +61,8 @@ public class ClubMainActivity extends AppCompatActivity {
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_tab_grid);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_tab_list);
 
+        mImageVIiewClubMain = findViewById(R.id.iv);
+
         //Floating action button
         FloatingActionButton fab = findViewById(R.id.create_event);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +73,13 @@ public class ClubMainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+//        mImageVIiewClubMain.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
 
         posterbackground = findViewById(R.id.iv);
         Glide.with(this).load(R.mipmap.logo).apply(bitmapTransform(new BlurTransformation(14, 1))).into(posterbackground);

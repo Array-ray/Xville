@@ -49,8 +49,8 @@ public class CreateEventActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance(); // return an object of Firebase Database
 
         //get the view of layout file
-        mSelectFile = findViewById(R.id.select_file);
-        mUploadFile = findViewById(R.id.upload_file);
+//        mSelectFile = findViewById(R.id.select_file);
+//        mUploadFile = findViewById(R.id.upload_file);
 
         mSelectFile.setOnClickListener(new View.OnClickListener() {
             @Override

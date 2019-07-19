@@ -1,6 +1,8 @@
 package com.example.xville_v1.authentication;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -105,6 +107,20 @@ public class LoginAsClub extends AppCompatActivity{
     }
 
     private void toClubMainPage() {
+
+        //1、打开Preferences，名称为setting，如果存在则打开它，否则创建新的Preferences
+        SharedPreferences preferences = getSharedPreferences("CLUB", Context.MODE_PRIVATE);
+
+        //2、让setting处于编辑状态
+        SharedPreferences.Editor editor=preferences.edit();
+
+        //3、存放数据
+        editor.putString("CLUBNAME", clubName.getText().toString().trim());
+        editor.putString("CLUBPASSWORD", clubpwd.getText().toString().trim());
+
+        //4、完成提交
+        editor.commit();
+
         Intent i = new Intent(LoginAsClub.this, ClubMainActivity.class);
         i.putExtra("CLUBNAME",clubName.getText().toString().trim());
         startActivity(i);
