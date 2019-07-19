@@ -1,6 +1,8 @@
 package com.example.xville_v1.authentication;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +16,6 @@ import android.widget.Toast;
 import com.example.xville_v1.Model.User;
 import com.example.xville_v1.R;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -66,13 +67,17 @@ public class RegisterActivity extends AppCompatActivity {
                 //check if the user is sign up, if not sign up return null,if not send
                 //verification email, return false
                 //manually reload
-                mAuth.getCurrentUser().reload().addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        currentUser = mAuth.getCurrentUser();
-                        emailVerified = currentUser.isEmailVerified();
-                    }
-                });
+
+                currentUser = mAuth.getCurrentUser();
+                emailVerified = currentUser.isEmailVerified();
+
+//                mAuth.getCurrentUser().reload().addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void aVoid) {
+//                        currentUser = mAuth.getCurrentUser();
+//                        emailVerified = currentUser.isEmailVerified();
+//                    }
+//                });
 
                 //write the user information into database
                 if(currentUser != null && emailVerified == true){
@@ -151,6 +156,18 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void toLoginActivity() {
+        //1、打开Preferences，名称为setting，如果存在则打开它，否则创建新的Preferences
+        SharedPreferences preferences = getSharedPreferences("User", Context.MODE_PRIVATE);
+
+        //2、让setting处于编辑状态
+        SharedPreferences.Editor editor=preferences.edit();
+
+        //3、存放数据
+        editor.putString("USERNAME", et_username.getText().toString().trim());
+
+        //4、完成提交
+        editor.commit();
+
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();

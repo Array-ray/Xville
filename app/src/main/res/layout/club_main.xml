@@ -45,11 +45,11 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:padding="8dp"
+        android:padding="1dp"
         android:layout_gravity="center_horizontal"
         android:elevation="5dp"
-        android:background="@drawable/background_circle"
-        android:src="@mipmap/logo"
+        android:background="@drawable/background_circle_white"
+        android:src="@mipmap/profile_club_swim"
         app:layout_anchor="@id/iv"
         app:layout_behavior=".behavior.TransferHeaderBehavior"/>
 

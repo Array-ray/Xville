@@ -53,7 +53,9 @@ dependencies {
     //Gao si mohu
     implementation 'jp.wasabeef:glide-transformations:4.0.1'
 
-
+    //Load the Gif
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.17'
+    
     //swipe to delete
     implementation "com.daimajia.swipelayout:library:1.2.0@aar"
 

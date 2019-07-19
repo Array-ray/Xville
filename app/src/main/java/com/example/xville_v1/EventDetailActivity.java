@@ -41,6 +41,8 @@ public class EventDetailActivity extends AppCompatActivity {
     private TextView location;
     private PDFView pdfViewer;
 
+    private String imgUrl;
+
     //Bundle and intent
     private Bundle extras;
     private String eventName;
@@ -93,7 +95,12 @@ public class EventDetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                mScheduleAddRef.child("Schedule").child(userID).child(eventName).setValue(eventName).addOnCompleteListener(new OnCompleteListener<Void>() {
+                Event event = new Event();
+                event.setTitle(title.getText().toString().trim());
+                event.setTime(title.getText().toString().trim());
+                event.setImg(imgUrl);
+                event.setAbout(getResources().getString(R.string.eventContent));
+                mScheduleAddRef.child("Schedule").child(userID).child(eventName).setValue(event).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
@@ -125,6 +132,7 @@ public class EventDetailActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Event post = dataSnapshot.getValue(Event.class);
+                imgUrl = post.getImg();
                 Glide.with(getApplicationContext()).load(post.getImg()).placeholder(R.drawable.common_full_open_on_phone).into(poster);
                 title.setText(post.getTitle());
                 time.setText(post.getTime());

@@ -82,7 +82,7 @@ public class ClubMainActivity extends AppCompatActivity {
 //        });
 
         posterbackground = findViewById(R.id.iv);
-        Glide.with(this).load(R.mipmap.logo).apply(bitmapTransform(new BlurTransformation(14, 1))).into(posterbackground);
+        Glide.with(this).load(R.mipmap.profile_club_swim).apply(bitmapTransform(new BlurTransformation(14, 1))).into(posterbackground);
     }
 
 }

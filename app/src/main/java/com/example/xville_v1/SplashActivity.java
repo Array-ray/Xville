@@ -27,7 +27,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.page_splash);
         initView();
         ClickToLogin();
-        mHandler.postDelayed(mRunnableToLogin, 8000);
+        mHandler.postDelayed(mRunnableToLogin, 4000);
     }
 
     private void ClickToLogin() {

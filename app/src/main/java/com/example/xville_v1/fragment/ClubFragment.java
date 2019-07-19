@@ -1,7 +1,10 @@
 package com.example.xville_v1.fragment;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.Toolbar;
@@ -34,6 +38,7 @@ public class ClubFragment extends Fragment{
     private RecyclerView mRecycleList;
     private ImageView moment;
     private Toolbar toolbar;
+    private Dialog mDialog;
 
     //Firebase
     private DatabaseReference ClubRef;
@@ -73,6 +78,11 @@ public class ClubFragment extends Fragment{
         mRecycleList = getView().findViewById(R.id.recycle_club_list);
         mRecycleList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        //Dialog
+        mDialog = new Dialog(getContext());
+        mDialog.setContentView(R.layout.dialog_clubinfo);
+        mDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         //icon for jumping to the club moment
         moment = getView().findViewById(R.id.imv_moment);
     }
@@ -101,8 +111,25 @@ public class ClubFragment extends Fragment{
         FirebaseRecyclerAdapter<Club, ClubsViewHolder> firebaseRecyclerAdapter =
                 new FirebaseRecyclerAdapter<Club, ClubsViewHolder>(options) {
                     @Override
-                    protected void onBindViewHolder(@NonNull ClubsViewHolder holder, int position, @NonNull Club model) {
+                    protected void onBindViewHolder(@NonNull final ClubsViewHolder holder, int position, @NonNull final Club model) {
                         holder.FillinHolder(getContext(),model.getName(),model.getBrief(), model.getImg());
+
+                        final String nam = model.getName();
+                        final String profilUrl = model.getImg();
+                        holder.getClubHolder().setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //send data to dialog
+                                TextView tv = getView().findViewById(R.id.info_club_name);
+                                TextView des = getView().findViewById(R.id.info_club_des);
+                                ImageView profile = getView().findViewById(R.id.info_club_avatar);
+                                tv.setText(nam);
+                                des.setText("This is "+ nam);
+                                Glide.with(getContext()).load(profilUrl).placeholder(R.mipmap.img_default_profile).into(profile);
+
+                                mDialog.show();
+                            }
+                        });
                     }
 
                     @NonNull
@@ -144,6 +171,7 @@ public class ClubFragment extends Fragment{
         private TextView clubName, clubBrief;
         private CircleImageView clubImage;
         private View mView;
+        private LinearLayout clubHolder;
 
 
         //Binding the view with ID in xml layout resource
@@ -153,6 +181,7 @@ public class ClubFragment extends Fragment{
             clubName= mView.findViewById(R.id.tv_club_name);
             clubBrief= mView.findViewById(R.id.tv_club_brief);
             clubImage= mView.findViewById(R.id.iv_club_profile_img);
+            clubHolder= mView.findViewById(R.id.item_club);
         }
 
         public void FillinHolder(Context ctx, String name, String brief, String img) {
@@ -160,6 +189,10 @@ public class ClubFragment extends Fragment{
             clubBrief.setText(brief);
             Glide.with(ctx).load(img).placeholder(R.mipmap.img_default_profile).into(clubImage);
             Toast.makeText(ctx, "iTEMS SHOW", Toast.LENGTH_LONG).show();
+        }
+
+        public LinearLayout getClubHolder(){
+            return clubHolder;
         }
     }
 

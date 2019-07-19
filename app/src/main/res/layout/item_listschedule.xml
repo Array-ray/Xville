@@ -1,42 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
     android:layout_marginTop="16dp"
+    android:orientation="horizontal"
+    android:padding="12dp"
     android:elevation="16dp"
     android:background="@drawable/curve_background">
 
         <RelativeLayout
             android:id="@+id/cate_color"
-            android:layout_width="30dp"
-            android:layout_height="150dp"
-            android:background="#FF9800"
-            android:layout_margin="15dp">
+            android:layout_width="12dp"
+            android:layout_height="140dp"
+            android:background="#FF9800">
         </RelativeLayout>
-        <TextView
-            android:id="@+id/tit_schedule"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/cate_color"
-            android:layout_toRightOf="@id/cate_color"
-            android:text="@string/aboutToolBsr"
-            android:layout_marginTop="20dp"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="#000000"/>
-        <TextView
-            android:layout_below="@id/tit_schedule"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/g"
-            android:layout_toEndOf="@id/cate_color"
-            android:layout_toRightOf="@id/cate_color"
-            android:layout_marginTop="10dp"
-            android:textColor="#757575"
-            android:textSize="13sp"
-            android:textStyle="bold"/>
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/schedule_pos"
+            android:layout_width="98dp"
+            android:layout_marginLeft="6dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:adjustViewBounds="true"
+            android:src="@drawable/pos_rotaract" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tit_schedule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/aboutToolBsr"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="#000000"/>
+                <TextView
+                    android:id="@+id/about_schedule"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/g"
+                    android:layout_marginTop="8dp"
+                    android:textColor="#757575"
+                    android:textSize="13sp"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="6dp">
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:tint="@color/colorPrimaryDark"
+                            android:src="@drawable/ic_time"/>
+                        <TextView
+                            android:id="@+id/schedule_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:text="Jun 11th"
+                            android:textSize="12sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="0dp">
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:tint="@color/colorPrimaryDark"
+                            android:src="@drawable/ic_location"/>
+                        <TextView
+                            android:id="@+id/schedule_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:text="B1#107"
+                            android:textSize="12sp"/>
+                </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+</LinearLayout>

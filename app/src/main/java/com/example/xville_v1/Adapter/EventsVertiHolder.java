@@ -43,7 +43,7 @@ public class EventsVertiHolder extends RecyclerView.ViewHolder{
     public void FillinHolder(Context ctx, String img, String tit, String hbClub, String tim,
                                     String loc){
         //Load poster
-        Glide.with(ctx).load(img).placeholder(R.drawable.common_full_open_on_phone).into(poster);
+        Glide.with(ctx).load(img).placeholder(R.drawable.img_placeholder_upload).into(poster);
         title.setText(tit);
         heldbyClub.setText(hbClub);
         time.setText(tim);

@@ -1,7 +1,9 @@
 package com.example.xville_v1.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.xville_v1.Adapter.ScheduleVertiHolder;
@@ -83,6 +86,12 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         userID = getArguments().getString("USERID");
+        //1、获取Preferences
+        // 相当于本地缓存: userinfo里面有用户名/密码/用户id （地址和contact直接从数据库读取就好）
+        SharedPreferences preferences=this.getActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
+
+        //2、取出数据 用户id和用户名
+        userName = preferences.getString("CLUBNAME",null);
     }
 
     @Override
@@ -97,6 +106,12 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         toolbar = getView().findViewById(R.id.toolbar);
         mAppCompatActivity.setSupportActionBar(toolbar);
         toolbar.setTitle("Schedule");
+
+        //The name
+        TextView textView = getView().findViewById(R.id.me_name);
+        textView.setText(userName);
+        TextView tv = getView().findViewById(R.id.me_header_name);
+        tv.setText("Hello "+userName);
 
         //inflate the drawer and navigationview to the current view
         drawer = getView().findViewById(R.id.drawer_layout);
@@ -151,7 +166,8 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
                     @Override
                     protected void onBindViewHolder(@NonNull ScheduleVertiHolder holder, int position, @NonNull Event model) {
                         //if(scheduleList.contains(model.getTitle())){
-                            holder.setScheduleTitle(model.getTitle());
+                            holder.FillinHolder(getContext(),model.getImg(),model.getTitle(),
+                                    model.getAbout(),model.getTime(),model.getLocation());
                         //}
                     }
 

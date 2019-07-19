@@ -24,6 +24,7 @@
                      Activity time: 23 July 2019, 6pm-8pm
                      Activity place: B1 G10</string>
     <string name="loading">I\'m hurry on, my master...</string>
+    <string name="eventContent">Art is a diverse range of human activities in creating visual, auditory or performing artifacts (artworks), expressing the author\'s imaginative, conceptual ideas, or technical skill, intended to be appreciated for their beauty or emotional power.[1][2] In their most general form these activities include the production of works of art, the criticism of art, the study of the history of art, and the aesthetic dissemination of art.</string>
 
 
     <style name="DeleteDialog" parent="android:style/Theme.Dialog">

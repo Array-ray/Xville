@@ -84,13 +84,12 @@
         </LinearLayout>
 
 
-
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="Art is a diverse range of human activities in creating visual, auditory or performing artifacts (artworks), expressing the author's imaginative, conceptual ideas, or technical skill, intended to be appreciated for their beauty or emotional power.[1][2] In their most general form these activities include the production of works of art, the criticism of art, the study of the history of art, and the aesthetic dissemination of art."
+            android:text="@string/eventContent"
             android:textColor="#2E2B2B"
             android:textSize="20sp"
             android:textStyle="italic" />
