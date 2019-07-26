@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottom_nav_today"
+        android:icon="@drawable/ic_today"
+        android:title="Today"/>
+
     <item
         android:id="@+id/bottom_nav_home"
         android:icon="@drawable/ic_bottom_nav_home"

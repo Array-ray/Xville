@@ -30,10 +30,13 @@ import android.widget.Toast;
 import com.example.xville_v1.Adapter.ScheduleVertiHolder;
 import com.example.xville_v1.Model.Event;
 import com.example.xville_v1.R;
+import com.example.xville_v1.authentication.GuideRoleActivity;
 import com.example.xville_v1.authentication.LoginActivity;
 import com.example.xville_v1.util.DeleteDialog;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -60,6 +63,8 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private RecyclerView mRecycleSchedule;
+    private TextView mName;
+    private TextView navHeaderName;
 
     //Firebase
     //database reference (point to the specific child)
@@ -71,6 +76,10 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
     //Title list stored in Schdule in firebase
     private List<String> scheduleList;
+
+    //Firebase user
+    private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
 
     //delete dailog
     private DeleteDialog deleteDialog;
@@ -85,13 +94,14 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        userID = getArguments().getString("USERID");
-        //1、获取Preferences
-        // 相当于本地缓存: userinfo里面有用户名/密码/用户id （地址和contact直接从数据库读取就好）
-        SharedPreferences preferences=this.getActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
+        //userID = getArguments().getString("USERID");
+
+        //get Preference for user
+        SharedPreferences preferences=this.getActivity().getSharedPreferences("USER", Context.MODE_PRIVATE);
 
         //2、取出数据 用户id和用户名
-        userName = preferences.getString("CLUBNAME",null);
+        userName = preferences.getString("USERNAME",null);
+        userID = preferences.getString("USERID",null);
     }
 
     @Override
@@ -102,16 +112,14 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         mActivity = getActivity();
         mAppCompatActivity = (AppCompatActivity) mActivity;
 
+        //intialization the view
+        initView();
+
         //initialize the toolbar
         toolbar = getView().findViewById(R.id.toolbar);
         mAppCompatActivity.setSupportActionBar(toolbar);
         toolbar.setTitle("Schedule");
 
-        //The name
-        TextView textView = getView().findViewById(R.id.me_name);
-        textView.setText(userName);
-        TextView tv = getView().findViewById(R.id.me_header_name);
-        tv.setText("Hello "+userName);
 
         //inflate the drawer and navigationview to the current view
         drawer = getView().findViewById(R.id.drawer_layout);
@@ -121,17 +129,14 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
-
-        //intialization the view
-        initView();
-
-
     }
 
     @Override
     public void onStart() {
         super.onStart();
+
+        //show the username
+        mName.setText("Hi " + userName);
 
         //Get a list of event title
 //        getScheduleList();
@@ -273,6 +278,12 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
     private void initView() {
         mRecycleSchedule = getView().findViewById(R.id.schedule_recycler);
         mRecycleSchedule.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        //Textview username
+        mName = getView().findViewById(R.id.me_name);
+
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
     }
 
     @Override
@@ -286,13 +297,31 @@ public class MeFragment extends Fragment implements NavigationView.OnNavigationI
 
         } else if (id == R.id.nav_Push_notification) {
 
-        } else if (id == R.id.nav_Push_notification) {
-
+        } else if (id == R.id.switch_signOut) {
+            SignOutUser();
         }
 
         DrawerLayout drawer = getView().findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void SignOutUser() {
+        if(currentUser != null){
+            mAuth.signOut();
+
+            //Remove value from database
+            DatabaseReference removeUserRef = FirebaseDatabase.getInstance().getReference();
+            if (removeUserRef.child("Users").child(userID) != null){
+                removeUserRef.child("Users").child(userID).removeValue();
+                Toast.makeText(getContext(), "User sign out successfully", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(getActivity().getApplicationContext(), GuideRoleActivity.class);
+                startActivity(i);
+            }else{
+                Toast.makeText(getContext(), "No user exists", Toast.LENGTH_LONG).show();
+            }
+
+        }
     }
 
 

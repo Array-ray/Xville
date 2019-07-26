@@ -97,9 +97,11 @@ public class EventDetailActivity extends AppCompatActivity {
             public void onClick(final View view) {
                 Event event = new Event();
                 event.setTitle(title.getText().toString().trim());
-                event.setTime(title.getText().toString().trim());
+                event.setAbout("This is " + title.getText().toString().trim());
+                event.setTime(time.getText().toString().trim());
+                event.setLocation(location.getText().toString().trim());
                 event.setImg(imgUrl);
-                event.setAbout(getResources().getString(R.string.eventContent));
+
                 mScheduleAddRef.child("Schedule").child(userID).child(eventName).setValue(event).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

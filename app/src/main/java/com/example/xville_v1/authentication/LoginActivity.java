@@ -1,11 +1,12 @@
 package com.example.xville_v1.authentication;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -69,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-        Log.d("show pwd1", pwd);
+        //Log.d("show pwd1", pwd);
         //Let the reference take us to the table(collection of data in the database)
         ref = FirebaseDatabase.getInstance().getReference().child("Users");
 
@@ -82,7 +83,12 @@ public class LoginActivity extends AppCompatActivity {
 //
                     if (pwd.equals(luser.getPassword())){
                         Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_LONG).show();
-                        toHomeFragment();
+
+                        //get user information for preference
+                        String id = luser.getID();
+                        String name = luser.getUsername();
+
+                        toHomeFragment(id, name);
                     } else {
                         //System.out.println("The read failed: " + databaseError.getCode());
                         Toast.makeText(LoginActivity.this, "The password is incorrect", Toast.LENGTH_LONG).show();
@@ -99,7 +105,20 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void toHomeFragment() {
+    private void toHomeFragment(String id, String name) {
+
+        //1、open the preferences with name club info reference, if not exist, create new preference
+        SharedPreferences userInfoPref = getSharedPreferences("USER", Context.MODE_PRIVATE);
+
+        //2、make it editable
+        SharedPreferences.Editor usereditor=userInfoPref.edit();
+
+        //3. get data from particular view widget
+        usereditor.putString("USERID", id);
+        usereditor.putString("USERNAME", name);
+
+        //4、finish submission
+        usereditor.commit();
 
         Intent i = new Intent(LoginActivity.this, MainActivity.class);
         i.putExtra("USERID",mID.getText().toString().trim());
@@ -126,6 +145,7 @@ public class LoginActivity extends AppCompatActivity {
         mGoRegisterTv = findViewById(R.id.btn_lg_registerTv);
     }
 
+    // onClick attribute to the textview
     public void goRegister(View view) {
         toRegisterActivity();
     }

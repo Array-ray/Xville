@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import com.example.xville_v1.fragment.ClubFragment;
 import com.example.xville_v1.fragment.HomeFragment;
 import com.example.xville_v1.fragment.MeFragment;
+import com.example.xville_v1.fragment.TodayFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         //using Bundle to send data
         bundle = new Bundle();
         bundle.putString("USERID", userID);
-        HomeFragment defaultFragment = new HomeFragment();
+        TodayFragment defaultFragment = new TodayFragment();
         defaultFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 defaultFragment).commit();
@@ -50,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
                     switch (menuItem.getItemId()) {
                         case R.id.bottom_nav_home:
                             selectedFragment = new HomeFragment();
+                            selectedFragment.setArguments(bundle);
+                            break;
+
+                        case R.id.bottom_nav_today:
+                            selectedFragment = new TodayFragment();
                             selectedFragment.setArguments(bundle);
                             break;
 

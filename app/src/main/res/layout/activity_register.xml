@@ -67,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:hint="Password"
+        android:hint="Password length more than 8"
         android:layout_marginTop="30dp"/>
 
     <Button

@@ -9,4 +9,5 @@
     <color name="black">#000000</color>
     <color name="cursorTextColor">#E0E0E0</color>
     <color name="red">#e53935</color>
+    <color name="gray">#e0e0e0</color>
 </resources>

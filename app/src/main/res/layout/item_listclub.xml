@@ -17,35 +17,52 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_club_profile_img"
-            android:layout_width="80dp"
+            android:layout_width="0dp"
             android:layout_height="80dp"
+            android:layout_weight="1"
             android:src="@mipmap/logo"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingLeft="12dp"
-            android:paddingTop="3dp">
+            android:paddingRight="12dp"
+            android:paddingTop="3dp"
+            android:layout_weight="3">
 
             <TextView
                 android:id="@+id/tv_club_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rotaract"
-                android:textSize="20dp"
+                android:textSize="18sp"
                 android:textColor="@color/black"
                 />
 
             <TextView
                 android:id="@+id/tv_club_brief"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="The club brief goes here. Like: We
-                dance to Express, Not to impress" />
+                android:text="We dance to Express, Not to impress" />
 
         </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/btn_follow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="8dp"
+                android:text="follow"
+                android:textSize="8sp"/>
+        </RelativeLayout>
+
 
     </LinearLayout>
 

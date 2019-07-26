@@ -100,7 +100,7 @@ public class LoginAsClub extends AppCompatActivity{
                 }
             });
         }else{
-            Toast.makeText(LoginAsClub.this, "User does not exist", Toast.LENGTH_LONG).show();
+            Toast.makeText(LoginAsClub.this, "Club does not exist", Toast.LENGTH_LONG).show();
         }
 
 
@@ -108,17 +108,17 @@ public class LoginAsClub extends AppCompatActivity{
 
     private void toClubMainPage() {
 
-        //1、打开Preferences，名称为setting，如果存在则打开它，否则创建新的Preferences
-        SharedPreferences preferences = getSharedPreferences("CLUB", Context.MODE_PRIVATE);
+        //1、open the preferences with name club info reference, if not exist, create new preference
+        SharedPreferences clubInfoRefer = getSharedPreferences("CLUB", Context.MODE_PRIVATE);
 
-        //2、让setting处于编辑状态
-        SharedPreferences.Editor editor=preferences.edit();
+        //2、make it editable
+        SharedPreferences.Editor editor=clubInfoRefer.edit();
 
-        //3、存放数据
+        //3. get data from particular view widget
         editor.putString("CLUBNAME", clubName.getText().toString().trim());
         editor.putString("CLUBPASSWORD", clubpwd.getText().toString().trim());
 
-        //4、完成提交
+        //4、finish submission
         editor.commit();
 
         Intent i = new Intent(LoginAsClub.this, ClubMainActivity.class);

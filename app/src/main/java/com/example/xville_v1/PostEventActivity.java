@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.xville_v1.Model.Event;
@@ -110,13 +109,13 @@ public class PostEventActivity extends AppCompatActivity {
         mEventDescription = findViewById(R.id.uploadEvent_post_description);
         mEventType = findViewById(R.id.uploadEvent_type);
 
-        //1、获取Preferences
-        // 相当于本地缓存: userinfo里面有用户名/密码/用户id （地址和contact直接从数据库读取就好）
-        SharedPreferences preferences=getSharedPreferences("CLUB", Context.MODE_PRIVATE);
+        //1、get Preference
+        // similar like local cache
+        SharedPreferences clubInfoRefer =getSharedPreferences("CLUB", Context.MODE_PRIVATE);
 
-        //2、取出数据 用户id和用户名
-        clubName = preferences.getString("CLUBNAME",null);
-        clubPassword =preferences.getString("CLUBPASSWORD", null);
+        //2、get the club name and password
+        clubName = clubInfoRefer.getString("CLUBNAME",null);
+        clubPassword =clubInfoRefer.getString("CLUBPASSWORD", null);
 
         mStorage = FirebaseStorage.getInstance().getReference();
         mDatabasePosts = FirebaseDatabase.getInstance().getReference().child("Posts");

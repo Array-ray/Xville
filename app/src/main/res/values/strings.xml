@@ -17,9 +17,7 @@
 
     <string name="aboutToolBsr">Activity information</string>
     <string name="aboutCollapsingToolBsr">About Collapsing Toolbar Layout</string>
-    <string name="g">Activity name: Swimming club training section
-                     Activity time: 23 July 2019, 3pm-6pm
-                     Activity place: B1 G01</string>
+    <string name="g">This is + "the name of event"</string>
     <string name="a">Activity name: Badminton club training section
                      Activity time: 23 July 2019, 6pm-8pm
                      Activity place: B1 G10</string>

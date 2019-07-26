@@ -80,18 +80,23 @@ public class RegisterActivity extends AppCompatActivity {
 //                });
 
                 //write the user information into database
-                if(currentUser != null && emailVerified == true){
+               if(currentUser != null && emailVerified == true){
                     writeTodatabase();
-                }else{
-                    mSend.setTextColor(getApplication().getResources().getColor(R.color.red));
-                    Toast.makeText(RegisterActivity.this, "Please send the verification email",
-                            Toast.LENGTH_LONG).show();
+               }else{
+                  mSend.setTextColor(getApplication().getResources().getColor(R.color.red));
+                  Toast.makeText(RegisterActivity.this, "Please send the verification email",
+                          Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
     private void writeTodatabase() {
+
+        if (!validateForm()) {
+            return;
+        }
+
         //Realtime database part
         mUser = new User();
         //fill in the information to the User class use setter in the  User class
@@ -117,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //FirebaseUser currentUser = mAuth.getCurrentUser();
+
     }
 
     private void registerUser(String email, String password) {
@@ -127,45 +132,52 @@ public class RegisterActivity extends AppCompatActivity {
         }
         //showProgressDialog();
 
-        //Authentication part
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            sendEmailVerification();
-                            Toast.makeText(RegisterActivity.this, "Authentication successed.",
-                                    Toast.LENGTH_SHORT).show();
+        currentUser = mAuth.getCurrentUser();
+        if (currentUser == null){
+            //Authentication part
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "createUserWithEmail:success");
+                                sendEmailVerification();
+                                Toast.makeText(RegisterActivity.this, "Authentication successed.",
+                                        Toast.LENGTH_SHORT).show();
 
-                            //updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
+                                //updateUI(user);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                //updateUI(null);
+                            }
+
+                            // [START_EXCLUDE]
+                            //hideProgressDialog();
+                            // [END_EXCLUDE]
                         }
+                    });
 
-                        // [START_EXCLUDE]
-                        //hideProgressDialog();
-                        // [END_EXCLUDE]
-                    }
-                });
+        }else{
+            Toast.makeText(RegisterActivity.this, "User already Signed in", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void toLoginActivity() {
-        //1、打开Preferences，名称为setting，如果存在则打开它，否则创建新的Preferences
+        //open the preference
         SharedPreferences preferences = getSharedPreferences("User", Context.MODE_PRIVATE);
 
-        //2、让setting处于编辑状态
+        //making the Preference editorable
         SharedPreferences.Editor editor=preferences.edit();
 
-        //3、存放数据
+        //save the data with key "USERNAME"
         editor.putString("USERNAME", et_username.getText().toString().trim());
 
-        //4、完成提交
+        //commit
         editor.commit();
 
         Intent intent = new Intent(this, LoginActivity.class);
@@ -180,6 +192,7 @@ public class RegisterActivity extends AppCompatActivity {
         et_password = findViewById(R.id.et_pwd_user);
         btn_register = findViewById(R.id.btn_signup_user);
         mSend = findViewById(R.id.btn_send);
+        emailVerified = false;
 
         //userDB = FirebaseDatabase.getInstance();
         userRef = FirebaseDatabase.getInstance().getReference();

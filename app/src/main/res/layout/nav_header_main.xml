@@ -14,9 +14,9 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:paddingTop="4dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:paddingTop="16dp"
         android:src="@drawable/avatar" />
 
     <TextView
@@ -28,6 +28,7 @@
         android:textStyle="bold"
         android:textColor="#F7F5F2"
         android:textSize="24sp"
+        android:visibility="invisible"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 
